@@ -3,7 +3,7 @@ import pickle
 import streamlit as st
 
 # Load trained model
-pickle_in = open("./classifier.pkl", 'rb')
+pickle_in = open("classifier.pkl", 'rb')
 classifier = pickle.load(pickle_in)
 
 
@@ -14,10 +14,10 @@ def prediction(loan_amnt, int_rate, annual_inc, dti, fico_range_low, pub_rec, re
     prediction = classifier.predict([[loan_amnt, int_rate, annual_inc, dti, fico_range_low, pub_rec, revol_bal,
                                       revol_util, total_acc, mths_since_rcnt_il, mort_acc,
                                       mths_since_recent_bc, mths_since_recent_inq]])
-    if prediction == 0:
-        pred = "Charged Off"
-    else:
+    if prediction == 1:
         pred = "Fully Paid"
+    else:
+        pred = "Charged Off"
     return pred
 
 
@@ -25,8 +25,8 @@ def prediction(loan_amnt, int_rate, annual_inc, dti, fico_range_low, pub_rec, re
 def main():
     # Front end Elements:
     html_temp = """
-    <div style ="background-color:black;padding:13px">
-    <h1 style ="color:white;text-align:center;">Lending Club Loan Prediction ML App</h1>
+    <div style ="background-color:yellow;padding:13px">
+    <h1 style ="color:aqua;text-align:center;">Lending Club Loan Prediction ML App</h1>
     </div>
     """
     # Display aspect of front end
